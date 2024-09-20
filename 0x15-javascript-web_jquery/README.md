@@ -1,1 +1,1 @@
-# 0x15-javascript-web_jquery
+# Solutions to tasks on JavaScript - Web jQuery
