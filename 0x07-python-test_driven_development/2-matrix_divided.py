@@ -1,35 +1,40 @@
 #!/usr/bin/python3
-"""Defines a matrix division function."""
+"""
+This is the ``Matrix`` module
+
+Contains the function ``matrix_divided``
+which divides a matrix of ints/floats by a given int
+"""
 
 
 def matrix_divided(matrix, div):
-    """Divide all elements of a matrix.
-
-    Args:
-        matrix (list): A list of lists of ints or floats.
-        div (int/float): The divisor.
-    Raises:
-        TypeError: If the matrix contains non-numbers.
-        TypeError: If the matrix contains rows of different sizes.
-        TypeError: If div is not an int or float.
-        ZeroDivisionError: If div is 0.
-    Returns:
-        A new matrix representing the result of the division.
     """
-    if (not isinstance(matrix, list) or matrix == [] or
-            not all(isinstance(row, list) for row in matrix) or
-            not all((isinstance(ele, int) or isinstance(ele, float))
-                    for ele in [num for row in matrix for num in row])):
-        raise TypeError("matrix must be a matrix (list of lists) of "
-                        "integers/floats")
-
-    if not all(len(row) == len(matrix[0]) for row in matrix):
-        raise TypeError("Each row of the matrix must have the same size")
-
+    :param matrix: the matrix to divide.
+    :param div: the number of the division.
+    Return a new_matrix of all items in matrix divided by div, all items in
+    new_matrix should be floats rounde to 2 decimal points max
+    """
+    lengths = []
+    new_matrix = []
+    type_error = "matrix must be a matrix (list of lists) of integers/floats"
     if not isinstance(div, int) and not isinstance(div, float):
         raise TypeError("div must be a number")
-
     if div == 0:
         raise ZeroDivisionError("division by zero")
-
-    return ([list(map(lambda x: round(x / div, 2), row)) for row in matrix])
+    if not isinstance(matrix, list) or not matrix:
+        raise TypeError(type_error)
+    for i in matrix:
+        quotients = []
+        if not isinstance(i, list) or not i:
+            raise TypeError(type_error)
+        for x in i:
+            if not isinstance(x, int) and not isinstance(x, float):
+                raise TypeError(type_error)
+            quotients.append(round(x / div, 2))
+        length = len(i)
+        if length not in lengths:
+            lengths.append(length)
+        new_matrix.append(quotients)
+    if len(lengths) != 1:
+        raise TypeError("Each row of the matrix must have the same size")
+    return new_matrix

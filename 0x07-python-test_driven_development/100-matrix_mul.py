@@ -1,13 +1,16 @@
 #!/usr/bin/python3
-"""Defines a matrix multiplication function."""
+"""
+The ``Matrix`` module
+The module is part of the Python test driven development project
+This module contains a function matrix_mul
+Defines a matrix multiplication function.
+"""
 
 
 def matrix_mul(m_a, m_b):
-    """Multiply two matrices.
-
-    Args:
-        m_a (list of lists of ints/floats): The first matrix.
-        m_b (list of lists of ints/floats): The second matrix.
+    """
+    :param m_a: The first matrix.
+    :param m_b: The second matrix.
     Raises:
         TypeError: If either m_a or m_b is not a list of lists of ints/floats.
         TypeError: If either m_a or m_b is empty.
@@ -17,9 +20,9 @@ def matrix_mul(m_a, m_b):
         A new matrix representing the multiplication of m_a by m_b.
     """
 
-    if m_a == [] or m_a == [[]]:
+    if m_a in ([], [[]]):
         raise ValueError("m_a can't be empty")
-    if m_b == [] or m_b == [[]]:
+    if m_b in ([], [[]]):
         raise ValueError("m_b can't be empty")
 
     if not isinstance(m_a, list):

@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-"""Defines a class MyInt that inherits from int."""
+
+"""
+This module is part of the Python Inheritance project
+Defines a class MyInt that inherits from int.
+"""
 
 
 class MyInt(int):

@@ -1,7 +1,13 @@
 #!/usr/bin/python3
-"""Defines an empty class BaseGeometry."""
+"""
+This module is part of the Python Inheritance project
+Defines an empty class BaseGeometry.
+"""
 
 
 class BaseGeometry:
-    """Represent base geometry."""
+    """
+    Represent base geometry.
+    An empty class BaseGeometry
+    """
     pass

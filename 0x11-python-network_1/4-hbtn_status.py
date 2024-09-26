@@ -1,7 +1,12 @@
 #!/usr/bin/python3
-"""Fetches https://alx-intranet.hbtn.io/status."""
-import requests
+"""
+Python script that fetches https://alx-intranet.hbtn.io/status
 
+Requirement:
+- You must use the package `requests`
+"""
+
+import requests
 
 if __name__ == "__main__":
     r = requests.get("https://alx-intranet.hbtn.io/status")

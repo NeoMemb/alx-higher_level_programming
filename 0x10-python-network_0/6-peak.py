@@ -1,31 +1,31 @@
 #!/usr/bin/python3
-""" Finds a peak in a list of unsorted integers
+"""
+Function that finds a peak in a list of unsorted integers
 """
 
 
 def find_peak(list_of_integers):
     """
-    Args:
-        list_of_integers(int): list of integers to find peak of
-    Returns: peak of list_of_integers or None
+    finds num that's greater than both left and right
     """
-    size = len(list_of_integers)
-    mid_e = size
-    mid = size // 2
-
-    if size == 0:
+    if len(list_of_integers) == 0:
         return None
 
-    while True:
-        mid_e = mid_e // 2
-        if (mid < size - 1 and
-                list_of_integers[mid] < list_of_integers[mid + 1]):
-            if mid_e // 2 == 0:
-                mid_e = 2
-            mid = mid + mid_e // 2
-        elif mid_e > 0 and list_of_integers[mid] < list_of_integers[mid - 1]:
-            if mid_e // 2 == 0:
-                mid_e = 2
-            mid = mid - mid_e // 2
-        else:
-            return list_of_integers[mid]
+    new_list = list_of_integers
+    beg = 0
+    end = len(new_list)-1
+
+    if new_list[beg] > new_list[beg+1]:
+        return new_list[beg]
+    if new_list[end] > new_list[end-1]:
+        return new_list[end]
+
+    mid = (beg+end)//2
+    if new_list[mid-1] < new_list[mid] and new_list[mid+1] < new_list[mid]:
+        return new_list[mid]
+    if new_list[mid] < new_list[mid-1]:
+        return find_peak(new_list[beg:mid+1])
+    elif new_list[mid] < new_list[mid+1]:
+        return find_peak(new_list[mid:end+1])
+    else:
+        return new_list[beg]

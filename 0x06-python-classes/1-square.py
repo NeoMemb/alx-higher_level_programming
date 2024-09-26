@@ -1,11 +1,16 @@
 #!/usr/bin/python3
 
-"""Define a class Square."""
+"""
+The module is part of the Python test driven development
+This module contains one Class: Square.
+Define a class Square.
+"""
 
 
 class Square:
-    """Represent a square."""
-
+    """
+    A class Square that defines a square
+    """
     def __init__(self, size):
         """Initialize a new Square.
 

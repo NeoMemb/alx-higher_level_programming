@@ -1,4 +1,9 @@
- a Rectangle subclass Square."""
+#!/usr/bin/python3
+"""
+This module is part of the Python Inheritance project
+Defines a class Rectangle that inherits from BaseGeometry.
+"""
+
 Rectangle = __import__('9-rectangle').Rectangle
 
 

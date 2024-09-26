@@ -1,10 +1,14 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+"""
+The module is part of the Python Classes project
+This module contains one Class: Rectangle.
+Define a class Rectangle.
+"""
 
 
 class Rectangle:
-    """Represent a rectangle.
-
+    """
+    A class 'Rectangle' that defines a rectangle
     Attributes:
         number_of_instances (int): The number of Rectangle instances.
         print_symbol (any): The symbol used for string representation.

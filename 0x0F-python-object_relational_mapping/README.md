@@ -1,167 +1,90 @@
 # Python - Object-relational mapping
 
-In this project, I learned about how object-relational mapping is used for
-database scripting. I became familiar with using MySQLdb and SQLAlchemy to
-query, create, edit, and delete tables in MySQL.
+### Python programming is awesome for several reasons:
 
-## Tests :heavy_check_mark:
+- Readability: Python's clean and simple syntax makes it easy to read and write code, enhancing developer productivity and reducing the likelihood of errors.
+- Versatility: Python can be used for a wide range of applications, including web development, data analysis, machine learning, artificial intelligence, scientific computing, automation, and more.
+- Large Standard Library: Python comes with a comprehensive standard library that provides ready-to-use modules and functions for various tasks, reducing the need to reinvent the wheel.
+- Community and Ecosystem: Python has a vibrant community of developers who contribute to open-source projects, libraries, and frameworks, enriching the Python ecosystem and providing solutions to diverse problems.
+- Cross-platform Compatibility: Python is available on multiple platforms, including Windows, macOS, and Linux, allowing developers to write code that can run seamlessly across different operating systems.
 
-* [tests](./tests): Folder of SQL and Python scripts for setting up test tables
-for all files. Provided by ALX.
+### Connect mysql
+To connect to a MySQL database from a Python script, you can use the mysql-connector-python package, which is an official MySQL driver for Python. Here's an example:
+```
+import mysql.connector
 
-## Tasks :page_with_curl:
+# Connect to the database
+connection = mysql.connector.connect(
+    host="localhost",
+    user="username",
+    password="password",
+    database="database_name"
+)
 
-* **0. Get all states**
-  * [0-select_states.py](./0-select_states.py): Python script that uses MySQLdb
-  to list all states in the database `hbtn_0e_0_usa`.
-  * Usage: `./0-select_states.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are ordered by ascending `states.id`.
+# Create a cursor object to execute SQL queries
+cursor = connection.cursor()
 
-* **1. Filter states**
-  * [1-filter_states.py](./1-filter_states.py): Python script that uses MySQLdb
-  to list all states with names starting with `N` in the database `hbtn_0e_0_usa`.
-  * Usage: `./1-filter_states.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are ordered by ascending `states.id`.
+# Execute a SELECT query
+cursor.execute("SELECT * FROM table_name")
 
-* **2. Filter states by user input**
-  * [2-my_filter_states.py](./2-my_filter_states.py): Python script that uses
-  MySQLdb to display all values matching a given name in the `states` table of
-  the database `hbtn_0e_0_usa`.
-  * Usage: `./2-my_filter_states.py <mysql username> <mysql password>
-  <database name> <state name searched>`.
-  * Results are ordered by ascending `states.id`.
-  * Uses string formatting to construct the SQL query.
+# Fetch rows from the result set
+rows = cursor.fetchall()
 
-* **3. SQL Injection...**
-  * [3-my_safe_filter_states.py](./3-my_safe_filter_states.py): Python script
-  that uses MySQLdb to display all values matching a given name in the `states`
-  table of the database `hbtn_0e_0_usa`.
-  * Usage: `./3-my_safe_filter_states.py <mysql username> <mysql password>
-  <database name> <state name searched>`.
-  * Results are ordered by ascending `states.id`.
-  * Safe from SQL injections.
+# Print the rows
+for row in rows:
+    print(row)
 
-* **4. Cities by states**
-  * [4-cities_by_state.py](./4-cities_by_state.py): Python script that uses
-  MySQLdb to list all cities from the database `hbtn_0e_4_usa`.
-  * Usage: `./4-cities_by_state.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are ordered by ascending `cities.id`.
+# Close cursor and connection
+cursor.close()
+connection.close()
+```
 
-* **5. All cities by state**
-  * [5-filter_cities.py](./5-filter_cities.py): Python script that uses MySQLdb
-  to list all cities of a given state in the database `hbtn_0e_4_usa`.
-  * Usage: `./5-filter_cities.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are sorted by ascending `cities.id`.
+### Insert new row
+To insert rows into a MySQL table from a Python script, you can use parameterized queries to safely execute SQL statements. Here's an example:
+```
+# Execute an INSERT query
+sql = "INSERT INTO table_name (column1, column2) VALUES (%s, %s)"
+values = ("value1", "value2")
+cursor.execute(sql, values)
 
-* **6. First state model**
-  * [model_state.py](./model_state.py): Python module defining a class `State`
-  that inherits from SQLAlchemy `Base` and links to the MySQL table `states`.
+# Commit the transaction
+connection.commit()
+```
 
-* **7. All states via SQLAlchemy**
-  * [7-model_state_fetch_all.py](./7-model_state_fetch_all.py): Python script
-  that uses SQLAlchemy to list all `State` objects from the database
-  `hbtn_0e_6_usa`.
-  * Usage: `./7-model_state_fetch_all.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are sorted by ascending `states.id`.
+### What is ORM
+ORM stands for Object-Relational Mapping. It's a programming technique for converting data between incompatible systems, such as object-oriented programming languages and relational databases. ORMs map objects from the application code to tables in the database, providing a higher-level abstraction and making it easier to interact with the database using object-oriented concepts.
 
-* **8. First state**
-  * [8-model_state_fetch_first.py](./8-model_state_fetch_first.py): Python script
-  that uses SQLAlchemy to print the first `State` object from the database
-  `hbtn_0e_6_usa`, ordered by `states.id`.
-  * Usage: `./8-model_state_fetch_first.py <mysql username> <mysql password>
-  <database name>`.
-  * If the `states` table is empty, prints `Nothing`.
+### Map Python class to table
+To map a Python class to a MySQL table using an ORM like SQLAlchemy, you would define a class that represents the table structure and relationships, and then use SQLAlchemy's declarative base to create a mapping between the class and the table. Here's a simplified example:
+```
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
 
-* **9. Contains `a`**
-  * [9-model_state_filter_a.py](./9-model_state_filter_a.py): Python script
-  that uses SQLAlchemy to list all `State` objects that contain the letter `a`
-  in the database `hbtn_0e_6_usa`.
-  * Usage: `./9-model_state_filter_a.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are ordered by ascending `states.id`.
+Base = declarative_base()
 
-* **10. Get a state**
-  * [10-model_state_my_get.py](./10-model_state_my_get.py): Python script that
-  uses SQLAlchemy to print the `id` of the `State` object with name matching that
-  passed as argument in the database `hbtn_0e_6_usa`.
-  * Usage: `./10-model_state_my_get.py <mysql username> <mysql password>
-  <database name> <state searched name>`.
-  * Displays the `id` of the matched `State`.
-  * If no match is found, prints `Not found`.
+class User(Base):
+    __tablename__ = 'users'
 
-* **11. Add a new state**
-  * [11-model_state_insert.py](./11-model_state_insert.py): Python script that
-  uses SQLAlchemy to add the `State` object "Louisiana" to the database
-`hbtn_0e_6_usa`.
-  * Usage: `./11-model_state_insert.py <mysql username> <mysql password>
-  <database name>`.
-  * Prints the `id` of the new `State` after creation.
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    age = Column(Integer)
 
-* **12. Update a state**
-  * [12-model_state_update_id_2.py](./12-model_state_update_id_2.py): Python
-  script that uses SQLAlchemy to change the name of the `State` object with
-  `id = 2` in the database `hbtn_0e_6_usa` to "New Mexico".
-  * Usage: `./12-model_state_update_id_2.py <mysql username> <mysql password>
-  <database name>`.
+# Create engine and create tables
+engine = create_engine('mysql+mysqlconnector://username:password@localhost/database_name')
+Base.metadata.create_all(engine)
+```
 
-* **13. Delete states**
-  * [13-model_state_delete_a.py](./13-model_state_delete_a.py): Python script
-  that uses SQLAlchemy to delete all `State` objects with a name containing the
-  letter `a` from the database `hbtn_0e_6_usa`.
-  * Usage: `./13-model_state_delete_a.py <mysql username> <mysql password>
-  <database name>`.
+### Python virtual environment
+To create a Python virtual environment, you can use the venv module, which is included in Python 3. It allows you to create isolated environments for Python projects, ensuring that dependencies are kept separate and preventing conflicts between different projects.
 
-* **14. Cities in state**
-  * [model_city.py](./model_city.py): Python module defining a class `City`
-  that inherits from SQLAlchemy `Base` and links to the MySQL table `cities`.
-    * Includes class attribute `state_id` that is a foreign key to
-    `states.id`.
-  * [14-model_city_fetch_by_state.py](./14-model_city_fetch_by_state.py):
-  Python script that uses SQLAlchemy to list all `City` objects in the database
-  `hbtn_0e_14_usa`.
-  * Usage: `./14-model_city_fetch_by_state.py <mysql username> <mysql password>
-  <database name>`.
-  * Results are sorted by ascending `cities.id`.
+Here's how you can create a virtual environment:
+- Open a terminal or command prompt.
+- Navigate to the directory where you want to create the virtual environment.
+- Run the following command:
+```
+python3 -m venv myenv
+```
 
-* **15. City relationship**
-  * [relationship_state.py](./relationship_state.py): Python module defining a
-  class `State` that inherits from SQLAlchemy `Base` and links to the MySQL table
-  `states`.
-    * Identical to the `State` class defined in [model_state.py](./model_state.py).
-    * Includes class attribute `classes` that represents a relationship with
-    the class `City`. If the `State` object is deleted, all linked `City` objects
-    are also deleted. `State` objects are backreferenced to `City` objects as
-    `state`.
-  * [relationship_city.py](./relationship_city.py): Python module defining a
-  class `City` that inherits from SQLAlchemy `Base` and links to the MySQL table
-  `cities`.
-    * Identical to the `City` class defined in [model_city.py](./model_city.py).
-  * [100-relationship_states_cities.py](./100-relationship_states_cities.py):
-  Python script that uses SQLAlchemy to add the `State` "California" with `City`
-  "San Francisco" to the database `hbtn_0e_100_usa`.
-  * Usage: `./100-relationship_states_cities.py <mysql username>
-  <mysql password> <database name>`.
-  * Uses the `cities` relationship for all `State` objects.
+This command creates a new directory named myenv, which contains the virtual environment. You can replace myenv with any name you prefer.
 
-* **16. List relationship**
-  * [101-relationship_states_cities_list.py](./101-relationship_states_cities_list.py):
-  Python script that uses SQLAlchemy to list all `State` and corresponding
-  `City` objects in the database `hbtn_0e_101_usa`.
-  * Usage: `./101-relationship_states_cities_list.py <mysql username>
-  <mysql password> <database name>`.
-  * Uses the `cities` relationship for all `State` objects.
-  * Results are sorted by ascending `states.id` and `cities.id`.
-
-* **17. List city**
-  * [102-relationship_cities_states_list.py](./102-relationship_cities_states_list.py):
-  Python script that uses SQLAlchemy to list all `City` objects from the database
-  `hbtn_0e_101_usa`.
-  * Usage: `./102-relationship_cities_states_list.py <mysql username>
-  <mysql password> <database name>`.
-  * Uses the `state` relationship to access the `State` objects linked to `City` objects.
-  * Results are sorted by ascending `cities.id`.
+pip3 install python3-dev libmysqlclient-dev zlib1g-dev mysqlclient

@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Defines a class-checking function."""
+"""
+This module is part of the Python Inheritance project
+Defines a class-checking function.
+"""
 
 
 def is_same_class(obj, a_class):

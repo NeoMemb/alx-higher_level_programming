@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-""" prints the State object with the name passed as argument from the database
+"""
+Script that prints all City objects from the database hbtn_0e_14_usa
 """
 import sys
 from model_state import Base, State

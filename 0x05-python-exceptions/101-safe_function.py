@@ -1,13 +1,12 @@
 #!/usr/bin/python3
-from __future__ import print_function
 import sys
 
 
 def safe_function(fct, *args):
+    """Function that executes a function safely."""
     try:
-        res = fct(*args)
+        return fct(*args)
     except Exception as e:
-        print("Exception: {}".format(e), file=sys.stderr)
+        error = "Exception: " + str(e) + "\n"
+        sys.stderr.write(error)
         return None
-    else:
-        return res

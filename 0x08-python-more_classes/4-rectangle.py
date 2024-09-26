@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+"""
+The module is part of the Python Classes project
+This module contains one Class: Rectangle.
+Define a class Rectangle.
+"""
 
 
 class Rectangle:
-    """Represent a rectangle."""
+    """A class 'Rectangle' that defines a rectangle"""
 
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle.
@@ -71,3 +75,7 @@ class Rectangle:
         rect = "Rectangle(" + str(self.__width)
         rect += ", " + str(self.__height) + ")"
         return (rect)
+
+    def __del__(self):
+        """Print a message for every deletion of a Rectangle."""
+        print("Bye rectangle...")

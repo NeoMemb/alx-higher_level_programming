@@ -1,1 +1,1 @@
-0x00. Python - Hello, World
+First course in the series. Learning the funcdermentals of Python and the Python Zen styles

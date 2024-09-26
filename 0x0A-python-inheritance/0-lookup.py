@@ -1,7 +1,14 @@
 #!/usr/bin/python3
-"""Defines an object attribute lookup function."""
+"""
+This module is part of the Python Inheritance project
+It has one function - lookup
+The function defines an object attribute.
+"""
 
 
 def lookup(obj):
-    """Return a list of an object's available attributes."""
+    """
+    A function that returns the list of available
+    attributes and methods of an object
+    """
     return (dir(obj))

@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+"""
+The module is part of the Python Classes project
+This module contains one Class: Rectangle.
+Define a class Rectangle.
+"""
 
 
 class Rectangle:
-    """Represent a rectangle."""
+    """A class 'Rectangle' that defines a rectangle"""
 
     def __init__(self, width=0, height=0):
         """Initialize a new Rectangle.
@@ -50,3 +54,8 @@ class Rectangle:
         if self.__width == 0 or self.__height == 0:
             return (0)
         return ((self.__width * 2) + (self.__height * 2))
+        return self.width * self.height
+
+    def perimeter(self):
+        """Define the perimeter of the rectangle"""
+        return 2 * (self.width + self.height)

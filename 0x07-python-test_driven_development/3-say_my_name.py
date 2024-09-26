@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-"""Defines a name-printing function."""
+"""
+This is the Name module
+The module is part of the Python test driven development
+This module contains a simple function to print out a first and last name
+"""
 
 
 def say_my_name(first_name, last_name=""):
-    """Print a name.
-
-    Args:
-        first_name (str): The first name to print.
-        last_name (str): The last name to print.
-    Raises:
-        TypeError: If either of first_name or last_name are not strings.
+    """
+    :param first_name: the first name.
+    :param last_name: the last name.
+    Return nothing
     """
     if not isinstance(first_name, str):
         raise TypeError("first_name must be a string")

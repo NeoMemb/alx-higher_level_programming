@@ -1,88 +1,71 @@
 # SQL - Introduction
+SQL (Structured Query Language) is a powerful programming language designed for managing and manipulating relational databases. With SQL, users can perform a variety of tasks such as querying data, updating records, defining schema structures, and managing access permissions within a database system. It provides a standardized syntax for interacting with databases, making it widely used across different database management systems (DBMS) like MySQL, PostgreSQL, SQL Server, and Oracle. SQL offers a rich set of commands, including SELECT for retrieving data, INSERT for adding new records, UPDATE for modifying existing data, and DELETE for removing records. Additionally, SQL supports various operations like joins, aggregations, and sorting to efficiently work with large datasets. Overall, SQL serves as the foundation for interacting with relational databases and is essential knowledge for anyone involved in data management, database administration, or software development.
 
-In this project, we began working on relational databases. I started practising introductory SQL data definitions and data manipulation language, making subqueries, and using functions.
+### What’s a database? 
+A database is a structured collection of data that is organized and stored electronically. It allows users to easily manage, manipulate, and retrieve data as needed.
 
-## Tasks :page_with_curl:
+### What’s a relational database? 
+A relational database is a type of database that organizes data into tables with rows and columns, where each row represents a record and each column represents a specific attribute or field. The relationships between tables are established through keys, usually primary keys and foreign keys.
 
-* **0. List databases**
-  * [0-list_databases.sql](./0-list_databases.sql): MySQL script that lists all databases.
+### What does SQL stand for? 
+SQL stands for Structured Query Language. It is a standard programming language used for managing and manipulating relational databases. SQL allows users to perform tasks such as querying data, updating data, creating and modifying database structures, and more.
 
-* **1. Create a database**
-  * [1-create_database.sql](./1-create_database.sql): MySQL script that creates the database `hbtn_0c_0`.
-  
-* **2. Delete a database**
-  * [2-remove_databases.sql](./2-remove_databases.sql): MySQL script that deletes the database `hbtn_0c_0`.
+### What’s MySQL? 
+MySQL is an open-source relational database management system (RDBMS) that uses SQL. It is one of the most popular databases in the world and is widely used for web applications, data warehousing, e-commerce, and many other applications.
 
-* **3. List tables**
-  * [3-list_tables.sql](./3-list_tables.sql): MySQL script that lists all tables.
-  
-* **4. First table**
-  * [4-first_table.sql](./4-first_table.sql): MySQL script that creates a table `first_table`.
-  * Description:
-    * `id`: INT
-    * `name`: VARCHAR(256)
+### How to create a database in MySQL? 
+In MySQL, you can create a new database using the `CREATE DATABASE` statement followed by the name of the database. For example:
 
-* **5. Full description**
-  * [5-full_table.sql](./5-full_table.sql): MySQL script that prints the full description of the table `first_table`.
-  
-* **6. List all in table**
-  * [6-list_values.sql](./6-list_values.sql): MySQL script that lists all rows of the table
-  `first_table`.
+```
+CREATE DATABASE my_database;
+```
 
-* **7. First add**
-  * [7-insert_value.sql](./7-insert_value.sql): MySQL script that inserts a new row in the table `first_table`.
-  * Description:
-    * `id` = `89`
-    * `name` = `Best School`
+### What does DDL and DML stand for? 
+DDL stands for Data Definition Language, and it is used to define and modify the structure of database objects such as tables, indexes, and views. Examples of DDL statements include CREATE, ALTER, and DROP. DML stands for Data Manipulation Language, and it is used to manipulate data within tables. Examples of DML statements include SELECT, INSERT, UPDATE, and DELETE.
 
-* **8. Count 89**
-  * [8-count_89.sql](./8-count_89.sql): MySQL script that displays the number records with `id = 89` in the table `first_table`.
+### How to CREATE or ALTER a table? 
+To create a new table in MySQL, you use the CREATE TABLE statement followed by the table name and the column definitions. For example:
 
-* **9. Full creation**
-  * [9-full_creation.sql](./9-full_creation.sql): MySQL script that creates and fills a table `second_table`.
-  * Description:
-    * `id`: INT
-    * `name`: VARCHAR(256)
-    * `score`: INT
-  * Records:
-    * `id` = 1, `name` = "John", `score` = 10
-    * `id` = 2, `name` = "Alex", `score` = 3
-    * `id` = 3, `name` = "Bob", `score` = 14
-    * `id` = 4, `name` = "George", `score` = 8
+```
+CREATE TABLE my_table (
+    id INT PRIMARY KEY,
+    name VARCHAR(50)
+);
+```
+To alter an existing table, you use the ALTER TABLE statement followed by the table name and the alteration you want to make. For example:
 
-* **10. List by best**
-  * [10-top_score.sql](./10-top_score.sql): MySQL script that lists the `score` and `name` of all records of the table `second_table` in order of descending `score`.
+```
+ALTER TABLE my_table ADD COLUMN age INT;
+```
 
-* **11. Select the best**
-  * [11-best_score.sql](./11-best_score.sql): MySQL script that lists the `score` and `name` of all records with a `score >= 10` in the table `second_table` in order of descending score.
+### How to SELECT data from a table? 
+To select data from a table in MySQL, you use the SELECT statement followed by the columns you want to retrieve and the table you want to retrieve them from. For example:
 
-* **12. Cheating is bad**
-  * [12-no_cheating.sql](./12-no_cheating.sql): MySQL script that updates the score of Bob to 10 the table `second_table`.
+```
+SELECT column1, column2 FROM my_table;
+```
 
-* **13. Score too low**
-  * [13-change_class.sql](./13-change_class.sql): MySQL script that removes all records with a `score <= 5` in the table `second_table`.
+### How to INSERT, UPDATE or DELETE data? 
+To insert new data into a table, you use the INSERT INTO statement followed by the table name and the values you want to insert. For example:
 
-* **14. Average**
-  * [14-average.sql](./14-average.sql): MySQL script that computes the average `score` of all records in the table `second_table`.
+```
+INSERT INTO my_table (column1, column2) VALUES (value1, value2);
+```
 
-* **15. Number by score**
-  * [15-groups.sql](./15-groups.sql): MySQL script that lists the `score` and number of records with the same score in the table `second_table` in order of descending count.
+To update existing data in a table, you use the UPDATE statement followed by the table name, the columns you want to update, and the new values. For example:
 
-* **16. Say my name**
-  * [16-no_link.sql](./16-no_link.sql): MySQL script that lists the `score` and `name` of all records in the table `second_table` in order of descending `score`.
-  * Does not display rows without a `name` value.
+```
+UPDATE my_table SET column1 = value1 WHERE condition;
+```
 
-* **17. Go to UTF8**
-  * [100-move_to_utf8.sql](./100-move_to_utf8.sql): MySQL script that converts the `hbtn_0c_0` database to UTF8.
+To delete data from a table, you use the DELETE FROM statement followed by the table name and an optional condition. For example:
 
-* **18. Temperatures #0**
-  * [101-avg_temperatures.sql](./101-avg_temperatures.sql): MySQL script that displays the average temperature (Fahrenheit) by city in descending order.
+```
+DELETE FROM my_table WHERE condition;
+```
 
-* **19. Temperatures #1**
-  * [102-top_city.sql](./102-top_city.sql): MySQL script that displays the three cities with the highest average temperature from July to August in descending order.
+### What are subqueries?
+Subqueries, also known as nested queries or inner queries, are queries that are embedded within another query. They allow you to retrieve data from one or more tables based on the results of another query. Subqueries can be used in SELECT, INSERT, UPDATE, and DELETE statements.
 
-* **20. Temperature #2**
-  * [103-max_state.sql](./103-max_state.sql): MySQL script that displays the max temperature of each state in order of state name.
-  
-## Dump file :dolphin:
-* Tasks 101-103 query from the database [temperatures.sql](./temperatures.sql).
+### How to use MySQL functions?
+MySQL provides a wide range of built-in functions that you can use to perform various operations on data. These functions include mathematical functions, string functions, date and time functions, aggregate functions, and more. You can use these functions in your SQL queries to manipulate and transform data as needed.

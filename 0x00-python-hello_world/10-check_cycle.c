@@ -10,21 +10,22 @@
 
 int check_cycle(listint_t *list_head)
 {
-	listint_t *first_ptr, *secnd_ptr;
+	listint_t *slow_ptr, *fast_ptr;
 
 	if (!list_head)
 		return (0);
 
-	first_ptr = list_head;
-	secnd_ptr = list_head->next;
-	while (secnd_ptr && first_ptr && secnd_ptr->next)
+	slow_ptr = list_head;
+	fast_ptr = list_head->next;
+	while (fast_ptr && slow_ptr && fast_ptr->next)
 	{
-		if (first_ptr == secnd_ptr)
+		if (slow_ptr == fast_ptr)
 			return (1);
 
-		first_ptr = first_ptr->next;
-		secnd_ptr = secnd_ptr->next->next;
+		slow_ptr = slow_ptr->next;
+		fast_ptr = fast_ptr->next->next;
 	}
 
 	return (0);
 }
+

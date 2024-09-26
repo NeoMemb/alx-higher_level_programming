@@ -1,7 +1,14 @@
 #!/usr/bin/python3
-"""Defines a Rectangle class."""
+
+"""
+The module is part of the Python Classes project
+This module contains one Class: Rectangle.
+Define a class Rectangle.
+"""
 
 
 class Rectangle:
-    """Represent a rectangle."""
+    """
+    An empty class Rectangle that defines a Rectangle
+    """
     pass

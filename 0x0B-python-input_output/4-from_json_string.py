@@ -1,9 +1,17 @@
 #!/usr/bin/python3
-# 6-from_json_string.py
-"""Defines a JSON-to-object function."""
+"""
+This module is part of the Python Input Output project.
+Defines a function that returns object (Python data structure).
+"""
+
 import json
 
 
 def from_json_string(my_str):
-    """Return the Python object representation of a JSON string."""
+    """
+    A function that returns an object (Python data structure)
+    represented by a JSON string
+    :param my_str:  The JSON string
+    Returns the JSON representation
+    """
     return json.loads(my_str)
